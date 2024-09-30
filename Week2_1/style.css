@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+td {
+    width: 150px;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 4em;
+    border-radius: 5px;
+    box-shadow: 2px 2px 0 black;
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black,
+        2px 2px 0 black;
+}
+
+#mouse {
+    background: linear-gradient(to bottom right, #4caf50, #8bc34a);
+}
+
+#elephant {
+    background: linear-gradient(to bottom right, #e91e63, #9c27b0);
+}
+
+#tiger {
+    background: linear-gradient(to bottom right, #2196f3, #03a9f4);
+}
+
+#lion {
+    background: linear-gradient(to bottom right, #ffc107, #ff9800);
+}
+
+#snake {
+    background: linear-gradient(to bottom right, #ff9800, #ff5722);
+}
+
+#dragon {
+    background: linear-gradient(to bottom right, #9c27b0, #673ab7);
+}
+
+#horse {
+    background: linear-gradient(to bottom right, #4caf50, #8bc34a);
+}
+
+#goat {
+    background: linear-gradient(to bottom right, #e91e63, #9c27b0);
+}
+
+#monkey {
+    background: linear-gradient(to bottom right, #2196f3, #03a9f4);
+}
+
+#rooster {
+    background: linear-gradient(to bottom right, #ffc107, #ff9800);
+}
+
+#dog {
+    background: linear-gradient(to bottom right, #e91e63, #9c27b0);
+}
+
+#pig {
+    background: linear-gradient(to bottom right, #ff9800, #ff5722);
+}
