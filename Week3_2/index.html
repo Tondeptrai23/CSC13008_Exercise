@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bé tập tính</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 440px;
+                margin: 20px auto;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+
+            label {
+                display: inline-block;
+                width: 100px;
+                margin-bottom: 10px;
+            }
+
+            input[type="text"] {
+                width: 180px;
+                padding: 4px;
+                margin-bottom: 10px;
+            }
+
+            input[type="radio"] {
+                margin-right: 5px;
+            }
+
+            button {
+                display: inline-block;
+                margin: 10px 0 0 10px;
+                padding: 5px 10px;
+            }
+
+            #notify {
+                color: red;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Bé tập tính</h1>
+        <form id="calculator">
+            <label for="first">Số thứ nhất</label>
+            <input type="text" id="first" name="first">
+            <input type="radio" name="op1" value="add"> Cộng
+            <input type="radio" name="op1" value="sub"> Trừ
+            <br>
+            <label for="second">Số thứ hai</label>
+            <input type="text" id="second" name="second">
+            <input type="radio" name="op1" value="mul"> Nhân
+            <input type="radio" name="op1" value="div"> Chia
+            <br>
+            <label for="result">Kết quả</label>
+            <input type="text" id="result" name="result" readonly>
+            <button type="button" onclick="calculate()">Tính</button>
+            <br>
+        </form>
+        <div id="notify"></div>
+
+        <script>
+            const notify = document.getElementById('notify');
+
+            document.getElementById('first').addEventListener('focus', function () {
+                notify.textContent = '';
+            });
+
+            document.getElementById('second').addEventListener('focus', function () {
+                notify.textContent = '';
+            });
+
+            document.getElementById('first').addEventListener('blur', function () {
+                if (isNaN(this.value)) {
+                    notify.textContent = 'Giá trị nhập ở ô thứ nhất không phải là số';
+                }
+            });
+
+            document.getElementById('second').addEventListener('blur', function () {
+                if (isNaN(this.value)) {
+                    notify.textContent = 'Giá trị nhập ở ô thứ hai không phải là số';
+                }
+            });
+
+            function calculate() {
+                const first = document.getElementById('first').value;
+                const second = document.getElementById('second').value;
+                const op1 = document.querySelector('input[name="op1"]:checked');
+                const res = document.getElementById('result');
+
+                if (!op1) {
+                    notify.textContent = 'Chưa chọn phép tính';
+                    return;
+                }
+
+                if (first === '' || second === '') {
+                    notify.textContent = 'Chưa nhập đủ số thứ nhất và số thứ hai';
+                    return;
+                }
+
+                notify.textContent = '';
+
+                let result;
+                if (op1 && op1.value === 'div') {
+                    if (parseFloat(second) === 0) {
+                        notify.textContent = 'Số thứ hai phải khác 0';
+                        return;
+                    }
+
+                    result = parseFloat(first) / parseFloat(second);
+                } else if (op1 && op1.value === 'mul') {
+                    result = parseFloat(first) * parseFloat(second);
+                } else if (op1 && op1.value === 'add') {
+                    result = parseFloat(first) + parseFloat(second);
+                } else if (op1 && op1.value === 'sub') {
+                    result = parseFloat(first) - parseFloat(second);
+                }
+
+                res.value = isNaN(result) ? '' : result;
+            }
+        </script>
+    </body>
+
+</html>

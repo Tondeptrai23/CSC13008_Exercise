@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    width: 640px;
+    height: 640px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.cell {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(63, 63, 63);
+    font-size: 34px;
+}
+
+.cell img {
+    width: 64px;
+    height: 64px;
+    align-self: flex-end;
+}
+
+.white-cell {
+    background-color: #f0d9b5;
+}
+
+.black-cell {
+    background-color: #bf6408;
+}
+
+.selected {
+    background-color: salmon;
+}
+
+.reachable {
+    background-color: #79e328;
+}
