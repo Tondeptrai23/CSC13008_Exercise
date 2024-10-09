@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bé tập tính</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script
+            src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 440px;
+                margin: 20px auto;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+
+            label {
+                display: inline-block;
+                width: 100px;
+                margin-bottom: 10px;
+            }
+
+            input[type="text"] {
+                width: 180px;
+                padding: 4px;
+                margin-bottom: 10px;
+            }
+
+            input[type="radio"] {
+                margin-right: 5px;
+            }
+
+            button {
+                display: inline-block;
+                margin: 10px 0 0 10px;
+                padding: 5px 10px;
+            }
+
+            #notify {
+                color: red;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Bé tập tính</h1>
+        <form id="calculator">
+            <label for="first">Số thứ nhất</label>
+            <input type="text" id="first" name="first">
+            <input type="radio" name="op1" value="add"> Cộng
+            <input type="radio" name="op1" value="sub"> Trừ
+            <br>
+            <label for="second">Số thứ hai</label>
+            <input type="text" id="second" name="second">
+            <input type="radio" name="op1" value="mul"> Nhân
+            <input type="radio" name="op1" value="div"> Chia
+            <br>
+            <label for="result">Kết quả</label>
+            <input type="text" id="result" name="result" readonly>
+            <button type="button" id="calculate">Tính</button>
+            <br>
+        </form>
+        <div id="notify"></div>
+
+        <script>
+            $(document).ready(function () {
+                const $notify = $('#notify');
+                const $first = $('#first');
+                const $second = $('#second');
+                const $result = $('#result');
+
+                $first.on('focus', function () {
+                    $notify.text('');
+                });
+
+                $second.on('focus', function () {
+                    $notify.text('');
+                });
+
+                $first.on('blur', function () {
+                    if (isNaN($(this).val())) {
+                        $notify.text('Giá trị nhập ở ô thứ nhất không phải là số');
+                    }
+                });
+
+                $second.on('blur', function () {
+                    if (isNaN($(this).val())) {
+                        $notify.text('Giá trị nhập ở ô thứ hai không phải là số');
+                    }
+                });
+
+                $('#calculate').on('click', calculate);
+
+                function calculate() {
+                    const first = $first.val();
+                    const second = $second.val();
+                    const op1 = $('input[name="op1"]:checked');
+
+                    if (op1.length === 0) {
+                        $notify.text('Chưa chọn phép tính');
+                        return;
+                    }
+
+                    if (first === '') {
+                        $notify.text('Chưa nhập số thứ nhất');
+                        return;
+                    }
+
+                    if (second === '') {
+                        $notify.text('Chưa nhập số thứ hai');
+                        return;
+                    }
+
+                    if (isNaN(first)) {
+                        $notify.text('Giá trị nhập ở ô thứ nhất không phải là số');
+                        return;
+                    }
+
+                    if (isNaN(second)) {
+                        $notify.text('Giá trị nhập ở ô thứ hai không phải là số');
+                        return;
+                    }
+
+
+                    $notify.text('');
+
+                    let result;
+                    if (op1.val() === 'div') {
+                        if (parseFloat(second) === 0) {
+                            $notify.text('Số thứ hai phải khác 0');
+                            return;
+                        }
+                        result = parseFloat(first) / parseFloat(second);
+                    } else if (op1.val() === 'mul') {
+                        result = parseFloat(first) * parseFloat(second);
+                    } else if (op1.val() === 'add') {
+                        result = parseFloat(first) + parseFloat(second);
+                    } else if (op1.val() === 'sub') {
+                        result = parseFloat(first) - parseFloat(second);
+                    }
+
+                    $result.val(isNaN(result) ? '' : result);
+                }
+            });
+
+        </script>
+    </body>
+
+</html>

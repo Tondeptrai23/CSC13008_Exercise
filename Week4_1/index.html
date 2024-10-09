@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Background Generator</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script
+            src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+                font-size: 2rem;
+                text-align: center;
+                margin: 2rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Background generator</h1>
+        <input type="color" name="left" id="left" value="#ffffff">
+        <input type="color" name="right" id="right" value="#ffffff">
+        <script>
+            $(document).ready(function () {
+                $('#left').on('input', function () {
+                    $('body').css('background', `linear-gradient(to right, ${$('#left').val()}, ${$('#right').val()})`);
+                });
+                $('#right').on('input', function () {
+                    $('body').css('background', `linear-gradient(to right, ${$('#left').val()}, ${$('#right').val()})`);
+                });
+            });
+        </script>
+    </body>
+
+</html>
